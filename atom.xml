@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wyywang.github.io</id>
     <title>Mimei~</title>
-    <updated>2021-02-24T10:35:23.291Z</updated>
+    <updated>2021-03-02T12:29:22.919Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wyywang.github.io"/>
     <link rel="self" href="https://wyywang.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://wyywang.github.io/images/avatar.png</logo>
     <icon>https://wyywang.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Mimei~</rights>
+    <entry>
+        <title type="html"><![CDATA[起飞]]></title>
+        <id>https://wyywang.github.io/post/qi-fei/</id>
+        <link href="https://wyywang.github.io/post/qi-fei/">
+        </link>
+        <updated>2021-03-02T12:27:01.000Z</updated>
+        <content type="html"><![CDATA[<p>我是懒狗</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://wyywang.github.io/post/hello-gridea/</id>
