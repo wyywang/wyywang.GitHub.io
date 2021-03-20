@@ -1,0 +1,230 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>随便记一下 nokvm安装出错-    依赖检测失败：         libxml2 = 2.9.1-6.el7_2.3  | Mimei~</title>
+<link rel="shortcut icon" href="https://wyywang.github.io/favicon.ico?v=1616259228030">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://wyywang.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="随便记一下 nokvm安装出错-    依赖检测失败：         libxml2 = 2.9.1-6.el7_2.3  | Mimei~ - Atom Feed" href="https://wyywang.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="uname -a Linux localhost.localdomain 3.10.0-1160.21.1.el7.x86_64 #1 SMP Tue Mar 16 18:28:22 UTC 2021 x86_64 x86_64 x86_6..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://wyywang.github.io">
+  <img class="avatar" src="https://wyywang.github.io/images/avatar.png?v=1616259228030" alt="">
+  </a>
+  <h1 class="site-title">
+    Mimei~
+  </h1>
+  <p class="site-description">
+    温故而知新🐱
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              随便记一下 nokvm安装出错-    依赖检测失败：         libxml2 = 2.9.1-6.el7_2.3 
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-03-21
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>uname -a Linux localhost.localdomain 3.10.0-1160.21.1.el7.x86_64 #1 SMP Tue Mar 16 18:28:22 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux<br>
+您在 /var/spool/mail/root 中有邮件</p>
+<p>很奇怪的 实体机 不知道哪里装的版本（? tryhackme查看啥的忘记了 等下去看看<br>
+安装nokvm的时候提示缺少</p>
+<p>[root@localhost node_2.1.7]# ./installer<br>
+Welcome to NoKvm installer v2.1.7<br>
+[1] ------&gt; enp39s0<br>
+[2] ------&gt; virbr0<br>
+[3] ------&gt; virbr0-nic<br>
+Please input the num set interface to bridge br0 (use 1): 1<br>
+installing node dependency packages...<br>
+install pacakge fail: exit status 230, 警告：rpms/jemalloc-3.6.0-1.el6.x86_64.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 0608b895: NOKEY<br>
+错误：依赖检测失败：<br>
+libxml2 = 2.9.1-6.el7_2.3 被 libxml2-python-2.9.1-6.el7_2.3.x86_64 需要</p>
+<p>try installing from online reciprocity...</p>
+<p>查看发现已经安装了 libxml2的更高一个版本 然后用yum搜索不到nokvm需要的版本。于是手动下载所需<br>
+<strong>rpm -Uvh --replacepkgs libxml2-2.9.1-6.el7_2.3.x86_64.rpm  --nodeps --force</strong>    谷歌一下就可以下载rpm包了 再强制安装吧？<br>
+（其实这个时候应该就可以了？ 但是当时就没注意 用了其他的方法----&gt;<br>
+完全重装python和yum(当时注意到这个libxml依赖很多) （bushi)<br>
+1、删除现有Python<br>
+[root@test ~]# rpm -qa|grep python|xargs rpm -ev –allmatches –nodeps ##强制删除已安装程序及其关联<br>
+[root@test ~]# whereis python |xargs rm -frv ##删除所有残余文件 ##xargs，允许你对输出执行其他某些命令<br>
+[root@test ~]# whereis python ##验证删除，返回无结果<br>
+2、删除现有的yum<br>
+[root@test ~]# rpm -qa|grep yum|xargs rpm -ev –allmatches –nodeps<br>
+[root@test ~]# whereis yum |xargs rm -frv</p>
+<p>当时继续搜索 发现：<br>
+解决方案</p>
+<p>1.创建目录用来存放rpm包：</p>
+<p>mkdir /usr/local/src/python</p>
+<p>查看系统版本：</p>
+<p>getconf LONG_BIT</p>
+<p>2.进入目录，使用wget分别下载python以及yum的rpm包</p>
+<p>http://vault.centos.org/ 这个地址可以下载不同版本系统对应的包（注意：一定要和系统的版本号对应）<br>
+里面有我们所需要的lixxxx-python版本</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/lvm2-python-libs-2.02.177-4.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/libxml2-python-2.9.1-6.el7_2.3.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-libs-2.7.5-68.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-ipaddress-1.0.16-2.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-backports-1.0-8.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-2.7.5-68.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-iniparse-0.4-9.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-pycurl-7.19.0-19.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-urlgrabber-3.10-8.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-setuptools-0.9.8-7.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-kitchen-1.1.1-5.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-chardet-2.2.1-1.el7_1.noarch.rpm<br></p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/rpm-python-4.11.3-32.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-utils-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-3.4.3-158.el7.centos.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-aliases-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-protectbase-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-45.el7.noarch.rpm</p>
+<p>3.执行以下命令，开始安装</p>
+<p>rpm -Uvh --replacepkgs lvm2-python-libs*.rpm --nodeps --force</p>
+<p>rpm -Uvh --replacepkgs libxml2-python*.rpm --nodeps --force</p>
+<p>rpm -Uvh --replacepkgs python*.rpm --nodeps --force</p>
+<p>**<br>
+rpm -Uvh --replacepkgs rpm-python*.rpm yum*.rpm --nodeps --force**</p>
+<p>注意到 --nodeps --force 于是继续下载<br>
+libxml2-2.9.1-6.el7_2.3.x86_64.rpm</p>
+<p>rpm -Uvh --replacepkgs libxml2-2.9.1-6.el7_2.3.x86_64.rpm  --nodeps --force<br>
+解决<br>
+由于问题少见 加上没有系统学习 误打误撞 仅记录 如有问题请师傅们多多指教</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wyywang.github.io/post/try-hack-menetwork/">
+              <h3 class="post-title">
+                #Try Hack Me(Network)
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://wyywang.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
