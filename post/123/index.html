@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>一种基于intel的vpro功能进行带外管理（KVM）的方法。 | Mimei&#39;s blog</title>
+<link rel="shortcut icon" href="https://blog.fangsiqi.top/favicon.ico?v=1685772667058">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.fangsiqi.top/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="一种基于intel的vpro功能进行带外管理（KVM）的方法。 | Mimei&#39;s blog - Atom Feed" href="https://blog.fangsiqi.top/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="在淘宝-上海浦东服务器商城-购买了dell t5820上经过测试成功。可以通过远程kvm直接连接电脑，弥补了塔式工作站没有ipmi的缺陷以及柜式服务器噪音巨大无法放在家里做homelab的问题。老板人很nice，推荐。同理，他家的z440应..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://blog.fangsiqi.top">
+  <img class="avatar" src="https://blog.fangsiqi.top/images/avatar.png?v=1685772667058" alt="">
+  </a>
+  <h1 class="site-title">
+    Mimei&#39;s blog
+  </h1>
+  <p class="site-description">
+    温故而知新🐱
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              一种基于intel的vpro功能进行带外管理（KVM）的方法。
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-06-03
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>在淘宝-上海浦东服务器商城-购买了dell t5820上经过测试成功。可以通过远程kvm直接连接电脑，弥补了塔式工作站没有ipmi的缺陷以及柜式服务器噪音巨大无法放在家里做homelab的问题。老板人很nice，推荐。同理，他家的z440应该也是支持的。</p>
+<h1 id="参考">参考</h1>
+<p>本文章参考了：<br>
+Intel官方Management Engine BIOS Extension (Intel®MEBX)手册：http://www.intel.com/content/dam/support/us/en/documents/motherboards/desktop/sb/intel_mebx_user_guide_for_7series.pdf<br>
+Intel官方AMT快速指南：https://communities.intel.com/external-link.jspa?url=http%3A%2F%2Fcommunities.intel.com%2Fresources%2Fstatics%2F34761%2FIntel_AMT_HBC_Deployment_Guide_1.1.pdf</p>
+<p>英特尔vPro博锐技术激活：https://www.cnblogs.com/lsgxeva/p/11326368.html<br>
+技术细节：https://zhuanlan.zhihu.com/p/105326863</p>
+<h1 id="前提">前提</h1>
+<p>可以通过bios进入mebx设置，但我不方便进入bios，请求店家装好了windows系统后，可以在系统直接开启amt功能。装好系统之后，请到https://www.dell.com/support/home/zh-cn/product-support/product/precision-5820-workstation/diagnose<br>
+打好主板驱动，以及<br>
+Intel Management Engine Components驱动。</p>
+<h2 id="需要下载的软件">需要下载的软件</h2>
+<p>1.https://github.com/rgl/intel-amt-notes<br>
+2.https://www.meshcommander.com/open-manageability<br>
+3.realvnc/其他vnc都行</p>
+<h1 id="操作过程">操作过程</h1>
+<p>在下载好上述文档之后，解压压缩包。<br>
+ACUWizardInstaller-12.1.0.87.msi是我们需要的，安装好之后运行（需要管理员权限）<br>
+<img src="https://blog.fangsiqi.top/post-images/1685771661660.jpg" alt="" loading="lazy"><br>
+点击<img src="https://blog.fangsiqi.top/post-images/1685771741139.jpg" alt="" loading="lazy">进行配置。<br>
+配置过程参考：https://zhuanlan.zhihu.com/p/105326863<br>
+如果是有线连接，不需要配置wifi。<br>
+配置完成之后，可以看到有相关系统提示。<br>
+<img src="https://blog.fangsiqi.top/post-images/1685772015731.jpg" alt="" loading="lazy"><br>
+随后打开安装好的Open MDTK<br>
+过程可以参考<br>
+https://zhuanlan.zhihu.com/p/105525209<br>
+打开<img src="https://blog.fangsiqi.top/post-images/1685772099254.jpg" alt="" loading="lazy"><br>
+随后过程就完成了借助vpro进行带外管理。<br>
+同时可以通过对应的amt的ip地址的:5900端口直接vnc链接。<br>
+<img src="https://blog.fangsiqi.top/post-images/1685772201892.jpg" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a>
+<ul>
+<li><a href="#%E9%9C%80%E8%A6%81%E4%B8%8B%E8%BD%BD%E7%9A%84%E8%BD%AF%E4%BB%B6">需要下载的软件</a></li>
+</ul>
+</li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B">操作过程</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://blog.fangsiqi.top/post/ji-yi-xia-jin-tian-fen-xi-de-diao-yu-pdf-yang-ben/">
+              <h3 class="post-title">
+                记一下今天分析的钓鱼pdf样本
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://blog.fangsiqi.top/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

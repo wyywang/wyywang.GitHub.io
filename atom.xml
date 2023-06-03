@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.fangsiqi.top</id>
+    <title>Mimei&apos;s blog</title>
+    <updated>2023-06-03T06:11:28.566Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://blog.fangsiqi.top"/>
+    <link rel="self" href="https://blog.fangsiqi.top/atom.xml"/>
+    <subtitle>温故而知新🐱</subtitle>
+    <logo>https://blog.fangsiqi.top/images/avatar.png</logo>
+    <icon>https://blog.fangsiqi.top/favicon.ico</icon>
+    <rights>All rights reserved 2023, Mimei&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[一种基于intel的vpro功能进行带外管理（KVM）的方法。]]></title>
+        <id>https://blog.fangsiqi.top/post/123/</id>
+        <link href="https://blog.fangsiqi.top/post/123/">
+        </link>
+        <updated>2023-06-03T05:30:05.000Z</updated>
+        <content type="html"><![CDATA[<p>在淘宝-上海浦东服务器商城-购买了dell t5820上经过测试成功。可以通过远程kvm直接连接电脑，弥补了塔式工作站没有ipmi的缺陷以及柜式服务器噪音巨大无法放在家里做homelab的问题。老板人很nice，推荐。同理，他家的z440应该也是支持的。</p>
+<h1 id="参考">参考</h1>
+<p>本文章参考了：<br>
+Intel官方Management Engine BIOS Extension (Intel®MEBX)手册：http://www.intel.com/content/dam/support/us/en/documents/motherboards/desktop/sb/intel_mebx_user_guide_for_7series.pdf<br>
+Intel官方AMT快速指南：https://communities.intel.com/external-link.jspa?url=http%3A%2F%2Fcommunities.intel.com%2Fresources%2Fstatics%2F34761%2FIntel_AMT_HBC_Deployment_Guide_1.1.pdf</p>
+<p>英特尔vPro博锐技术激活：https://www.cnblogs.com/lsgxeva/p/11326368.html<br>
+技术细节：https://zhuanlan.zhihu.com/p/105326863</p>
+<h1 id="前提">前提</h1>
+<p>可以通过bios进入mebx设置，但我不方便进入bios，请求店家装好了windows系统后，可以在系统直接开启amt功能。装好系统之后，请到https://www.dell.com/support/home/zh-cn/product-support/product/precision-5820-workstation/diagnose<br>
+打好主板驱动，以及<br>
+Intel Management Engine Components驱动。</p>
+<h2 id="需要下载的软件">需要下载的软件</h2>
+<p>1.https://github.com/rgl/intel-amt-notes<br>
+2.https://www.meshcommander.com/open-manageability<br>
+3.realvnc/其他vnc都行</p>
+<h1 id="操作过程">操作过程</h1>
+<p>在下载好上述文档之后，解压压缩包。<br>
+ACUWizardInstaller-12.1.0.87.msi是我们需要的，安装好之后运行（需要管理员权限）<br>
+<img src="https://blog.fangsiqi.top/post-images/1685771661660.jpg" alt="" loading="lazy"><br>
+点击<img src="https://blog.fangsiqi.top/post-images/1685771741139.jpg" alt="" loading="lazy">进行配置。<br>
+配置过程参考：https://zhuanlan.zhihu.com/p/105326863<br>
+如果是有线连接，不需要配置wifi。<br>
+配置完成之后，可以看到有相关系统提示。<br>
+<img src="https://blog.fangsiqi.top/post-images/1685772015731.jpg" alt="" loading="lazy"><br>
+随后打开安装好的Open MDTK<br>
+过程可以参考<br>
+https://zhuanlan.zhihu.com/p/105525209<br>
+打开<img src="https://blog.fangsiqi.top/post-images/1685772099254.jpg" alt="" loading="lazy"><br>
+随后过程就完成了借助vpro进行带外管理。<br>
+同时可以通过对应的amt的ip地址的:5900端口直接vnc链接。<br>
+<img src="https://blog.fangsiqi.top/post-images/1685772201892.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[记一下今天分析的钓鱼pdf样本]]></title>
+        <id>https://blog.fangsiqi.top/post/ji-yi-xia-jin-tian-fen-xi-de-diao-yu-pdf-yang-ben/</id>
+        <link href="https://blog.fangsiqi.top/post/ji-yi-xia-jin-tian-fen-xi-de-diao-yu-pdf-yang-ben/">
+        </link>
+        <updated>2022-08-10T14:39:37.000Z</updated>
+        <content type="html"><![CDATA[<h1 id=""></h1>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[随便记一下 nokvm安装出错-    依赖检测失败：         libxml2 = 2.9.1-6.el7_2.3 ]]></title>
+        <id>https://blog.fangsiqi.top/post/sui-bian-ji-yi-xia-nokvm-an-zhuang-chu-cuo-yi-lai-jian-ce-shi-bai-libxml2-291-6el7_23/</id>
+        <link href="https://blog.fangsiqi.top/post/sui-bian-ji-yi-xia-nokvm-an-zhuang-chu-cuo-yi-lai-jian-ce-shi-bai-libxml2-291-6el7_23/">
+        </link>
+        <updated>2021-03-20T16:41:34.000Z</updated>
+        <content type="html"><![CDATA[<p>uname -a Linux localhost.localdomain 3.10.0-1160.21.1.el7.x86_64 #1 SMP Tue Mar 16 18:28:22 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux<br>
+您在 /var/spool/mail/root 中有邮件</p>
+<p>很奇怪的 实体机 不知道哪里装的版本（? tryhackme查看啥的忘记了 等下去看看<br>
+安装nokvm的时候提示缺少</p>
+<p>[root@localhost node_2.1.7]# ./installer<br>
+Welcome to NoKvm installer v2.1.7<br>
+[1] ------&gt; enp39s0<br>
+[2] ------&gt; virbr0<br>
+[3] ------&gt; virbr0-nic<br>
+Please input the num set interface to bridge br0 (use 1): 1<br>
+installing node dependency packages...<br>
+install pacakge fail: exit status 230, 警告：rpms/jemalloc-3.6.0-1.el6.x86_64.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 0608b895: NOKEY<br>
+错误：依赖检测失败：<br>
+libxml2 = 2.9.1-6.el7_2.3 被 libxml2-python-2.9.1-6.el7_2.3.x86_64 需要</p>
+<p>try installing from online reciprocity...</p>
+<p>查看发现已经安装了 libxml2的更高一个版本 然后用yum搜索不到nokvm需要的版本。于是手动下载所需<br>
+<strong>rpm -Uvh --replacepkgs libxml2-2.9.1-6.el7_2.3.x86_64.rpm  --nodeps --force</strong>    谷歌一下就可以下载rpm包了 再强制安装吧？<br>
+（其实这个时候应该就可以了？ 但是当时就没注意 用了其他的方法----&gt;<br>
+完全重装python和yum(当时注意到这个libxml依赖很多) （bushi)<br>
+1、删除现有Python<br>
+[root@test ~]# rpm -qa|grep python|xargs rpm -ev –allmatches –nodeps ##强制删除已安装程序及其关联<br>
+[root@test ~]# whereis python |xargs rm -frv ##删除所有残余文件 ##xargs，允许你对输出执行其他某些命令<br>
+[root@test ~]# whereis python ##验证删除，返回无结果<br>
+2、删除现有的yum<br>
+[root@test ~]# rpm -qa|grep yum|xargs rpm -ev –allmatches –nodeps<br>
+[root@test ~]# whereis yum |xargs rm -frv</p>
+<p>当时继续搜索 发现：<br>
+解决方案</p>
+<p>1.创建目录用来存放rpm包：</p>
+<p>mkdir /usr/local/src/python</p>
+<p>查看系统版本：</p>
+<p>getconf LONG_BIT</p>
+<p>2.进入目录，使用wget分别下载python以及yum的rpm包</p>
+<p>http://vault.centos.org/ 这个地址可以下载不同版本系统对应的包（注意：一定要和系统的版本号对应）<br>
+里面有我们所需要的lixxxx-python版本</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/lvm2-python-libs-2.02.177-4.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/libxml2-python-2.9.1-6.el7_2.3.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-libs-2.7.5-68.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-ipaddress-1.0.16-2.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-backports-1.0-8.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-2.7.5-68.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-iniparse-0.4-9.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-pycurl-7.19.0-19.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-urlgrabber-3.10-8.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-setuptools-0.9.8-7.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-kitchen-1.1.1-5.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/python-chardet-2.2.1-1.el7_1.noarch.rpm<br></p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/rpm-python-4.11.3-32.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-utils-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-3.4.3-158.el7.centos.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-aliases-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-protectbase-1.1.31-45.el7.noarch.rpm</p>
+<p>wget http://vault.centos.org/7.5.1804/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-45.el7.noarch.rpm</p>
+<p>3.执行以下命令，开始安装</p>
+<p>rpm -Uvh --replacepkgs lvm2-python-libs*.rpm --nodeps --force</p>
+<p>rpm -Uvh --replacepkgs libxml2-python*.rpm --nodeps --force</p>
+<p>rpm -Uvh --replacepkgs python*.rpm --nodeps --force</p>
+<p>**<br>
+rpm -Uvh --replacepkgs rpm-python*.rpm yum*.rpm --nodeps --force**</p>
+<p>注意到 --nodeps --force 于是继续下载<br>
+libxml2-2.9.1-6.el7_2.3.x86_64.rpm</p>
+<p>rpm -Uvh --replacepkgs libxml2-2.9.1-6.el7_2.3.x86_64.rpm  --nodeps --force<br>
+解决<br>
+由于问题少见 加上没有系统学习 误打误撞 仅记录 如有问题请师傅们多多指教</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[#Try Hack Me(Network)]]></title>
+        <id>https://blog.fangsiqi.top/post/try-hack-menetwork/</id>
+        <link href="https://blog.fangsiqi.top/post/try-hack-menetwork/">
+        </link>
+        <updated>2021-03-16T01:53:09.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="telnet">telnet</h2>
+<p>###nmap使用</p>
+<ul>
+<li>sS（root模式下默认启用）</li>
+<li>T4（提升速度）</li>
+<li>p- （不仅仅扫描top1000端口）
+<h3 id="icmp抓包ping回连-检测rce时候类似于dnslog作用">icmp抓包（ping回连-检测rce时候类似于dnslog作用）</h3>
+sudo tcpdump ip proto \icmp -i eth0</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Test_pic]]></title>
+        <id>https://blog.fangsiqi.top/post/test_pic/</id>
+        <link href="https://blog.fangsiqi.top/post/test_pic/">
+        </link>
+        <updated>2021-03-10T07:32:18.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://blog.fangsiqi.top/post-images/1615361573732.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[起飞]]></title>
+        <id>https://blog.fangsiqi.top/post/qi-fei/</id>
+        <link href="https://blog.fangsiqi.top/post/qi-fei/">
+        </link>
+        <updated>2021-03-02T12:27:01.000Z</updated>
+        <content type="html"><![CDATA[<p>我是懒狗</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://blog.fangsiqi.top/post/hello-gridea/</id>
+        <link href="https://blog.fangsiqi.top/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
